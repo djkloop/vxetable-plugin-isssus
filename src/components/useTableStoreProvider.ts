@@ -5,8 +5,19 @@ export type TableDataItem = {
   name: string;
 };
 
+
+function hookInputEvents() {
+  // 
+  console.log('input')
+}
+
 const [useProviderTableStore, useInjectTableStore] = createInjectionState(
   () => {
+
+    const events = {
+      input: hookInputEvents
+    }
+
     const tableData = ref<TableDataItem[]>([]);
     const tableColumns = ref([
       {
@@ -19,6 +30,20 @@ const [useProviderTableStore, useInjectTableStore] = createInjectionState(
       {
         field: "name",
         title: "名称",
+        cellRender: {
+          name: 'ExtendInput',
+          attrs: {
+            placeholder: "请输入名称"
+          },
+          props: {
+            value: '',
+            xyz: 'good!',
+            desc: {
+              type: 'ExtendInput'
+            }
+          },
+          events
+        }
       },
     ]);
     const tablePageOptions = ref({

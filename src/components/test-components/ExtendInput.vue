@@ -11,10 +11,17 @@
 <script setup lang="ts">
   import { ref } from 'vue';
 
+  defineProps({
+    value: {
+      type: String,
+      default: ''
+    }
+  })
+
   const value = ref('')
 
   //
-  console.log('render')
+  console.log('我被渲染了！')
 </script>
 
 <style scoped>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ColumnCellRenderParams, ColumnEditRenderParams, RenderOptions, RenderParams, VXETableCore } from "vxe-table";
 import { assign, objectEach } from "xe-utils";
 
@@ -10,7 +11,7 @@ function getModelEvent() {
 }
 
 function getChangeEvent() {
-  let baseEvent = "input";
+  const baseEvent = "input";
 
   // 因为eleForm内置了input事件所以不在监听组件的change事件,防止二次触发change事件
   // if (isEleFormInput(renderOpts.name) || isEleFormInputNumber(renderOpts.name)) {
@@ -121,9 +122,11 @@ function createDefaultRender(defaultProps?: { [key: string]: any }) {
     const rowData = row[column.field];
 
     return (
-      <div data-validate-x={$rowIndex}  data-validate-field={column.field} class={[`vxe-render-${desc.type}`]}>
-        <renderOpts.name key={column.field} {...dynamicOptions}  class={["vxeTableCellComponent", rowData?.__isError__ && "vxeTableCellComponentError"]}></renderOpts.name>
-      </div>
+      <keep-alive>
+        <div data-validate-x={$rowIndex}  data-validate-field={column.field} class={[`vxe-render-${desc.type}`]}>
+          <renderOpts.name key={column.field} {...dynamicOptions}  class={["vxeTableCellComponent", rowData?.__isError__ && "vxeTableCellComponentError"]}></renderOpts.name>
+        </div>
+      </keep-alive>
     );
   };
 }
@@ -138,8 +141,8 @@ export const VXETableExtendRenderPlugin = {
 
     // 注册extendForm组件
     const extendFormComponents: any = {};
-    ['input'].forEach((component: any) => {
-      extendFormComponents[component.name] = {
+    ['ExtendInput'].forEach((component: any) => {
+      extendFormComponents[component] = {
         renderDefault: createDefaultRender()
       };
     });
