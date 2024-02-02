@@ -2,14 +2,14 @@
   <div>
     <input
       v-model="newValue"
-      placeholder=""
+      :placeholder="placeholder"
       placeholder-class="input-placeholder"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
 
   const props = defineProps({
     value: {
@@ -24,6 +24,15 @@
       type: Number,
       default: 0
     }
+  })
+
+  const placeholder = ref('请求中')
+
+  onMounted(() => {
+    // 模拟请求
+    setTimeout(() => {
+      placeholder.value = '我渲染了'
+    }, 1500)
   })
 
 const newValue = ref('')
