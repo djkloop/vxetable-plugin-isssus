@@ -3,6 +3,7 @@ import { computed, nextTick, ref, watch } from "vue";
 
 export type TableDataItem = {
   name: string;
+  index: number;
 };
 
 
@@ -105,6 +106,7 @@ const [useProviderTableStore, useInjectTableStore] = createInjectionState(
       //
       tableData.value.push({
         name: "123" + Math.random(),
+        index: tableData.value.length
       });
     }
 

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Component } from "vue";
 import type { ColumnCellRenderParams, ColumnEditRenderParams, RenderOptions, RenderParams, VXETableCore } from "vxe-table";
 import { assign, objectEach } from "xe-utils";
 
@@ -122,11 +123,9 @@ function createDefaultRender(defaultProps?: { [key: string]: any }) {
     const rowData = row[column.field];
 
     return (
-      <keep-alive>
-        <div data-validate-x={$rowIndex}  data-validate-field={column.field} class={[`vxe-render-${desc.type}`]}>
-          <renderOpts.name key={`${column.field}_${$rowIndex}_${$columnIndex}`} colIndex={$columnIndex} rowIndex={$rowIndex}  {...dynamicOptions}  class={["vxeTableCellComponent", rowData?.__isError__ && "vxeTableCellComponentError"]}></renderOpts.name>
-        </div>
-      </keep-alive>
+      <div data-validate-x={$rowIndex}  data-validate-field={column.field} class={[`vxe-render-${desc.type}`]}>
+        <renderOpts.name key={`${column.field}_${$rowIndex}_${$columnIndex}_${row.index}`} colIndex={$columnIndex} rowIndex={$rowIndex}  {...dynamicOptions}  class={["vxeTableCellComponent", rowData?.__isError__ && "vxeTableCellComponentError"]}></renderOpts.name>
+      </div>
     );
   };
 }

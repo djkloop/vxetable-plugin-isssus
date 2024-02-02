@@ -1,7 +1,7 @@
 <template>
   <div>
     <input
-      v-model="value"
+      v-model="newValue"
       placeholder=""
       placeholder-class="input-placeholder"
     />
@@ -26,8 +26,7 @@
     }
   })
 
-  const value = ref('')
-
+const newValue = ref('')
   //
   console.log(`我被渲染了！${props.rowIndex}_${props.colIndex}`)
 </script>
