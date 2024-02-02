@@ -11,17 +11,25 @@
 <script setup lang="ts">
   import { ref } from 'vue';
 
-  defineProps({
+  const props = defineProps({
     value: {
       type: String,
       default: ''
+    },
+    colIndex: {
+      type: Number,
+      default: 0
+    },
+    rowIndex: {
+      type: Number,
+      default: 0
     }
   })
 
   const value = ref('')
 
   //
-  console.log('我被渲染了！')
+  console.log(`我被渲染了！${props.rowIndex}_${props.colIndex}`)
 </script>
 
 <style scoped>

@@ -108,7 +108,7 @@ function getCellDescProps(renderOpts: RenderOptions) {
 // vue2 template -> props / attrs / $listeners / class / style / slot / scopeSlot
 function createDefaultRender(defaultProps?: { [key: string]: any }) {
   return function(_: any, renderOpts: any, params: any) {
-    const { row, column, $rowIndex } = params;
+    const { row, column, $rowIndex, $columnIndex } = params;
     const { attrs } = renderOpts;
     const cellValue = row[column.field][getTableBaseData()];
 
@@ -124,7 +124,7 @@ function createDefaultRender(defaultProps?: { [key: string]: any }) {
     return (
       <keep-alive>
         <div data-validate-x={$rowIndex}  data-validate-field={column.field} class={[`vxe-render-${desc.type}`]}>
-          <renderOpts.name key={column.field} {...dynamicOptions}  class={["vxeTableCellComponent", rowData?.__isError__ && "vxeTableCellComponentError"]}></renderOpts.name>
+          <renderOpts.name key={`${column.field}_${$rowIndex}_${$columnIndex}`} colIndex={$columnIndex} rowIndex={$rowIndex}  {...dynamicOptions}  class={["vxeTableCellComponent", rowData?.__isError__ && "vxeTableCellComponentError"]}></renderOpts.name>
         </div>
       </keep-alive>
     );
